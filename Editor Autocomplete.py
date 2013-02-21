@@ -1,3 +1,5 @@
+# https://github.com/sartak/anki-editor-autocomplete
+
 from aqt import mw
 from aqt import editor
 from anki.hooks import wrap
