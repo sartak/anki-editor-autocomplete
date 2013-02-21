@@ -13,8 +13,7 @@ def mySetup(self, note, hide=True, focus=False):
     # only initialize the autocompleter on Add Cards not in browser
     if self.note and self.addMode:
         self.web.eval("""
-            document.styleSheets[0].addRule('.autocomplete', 'margin: 0.3em 0 1.0em 0;');
-            document.styleSheets[0].addRule('.autocomplete .copy', 'color: blue; text-decoration: underline; cursor: pointer;');
+            document.styleSheets[0].addRule('.autocomplete', 'margin: 0.3em 0 1.0em 0; color: blue; text-decoration: underline; cursor: pointer;');
 
             // every second send the current state over
             setInterval(function () {
@@ -67,7 +66,7 @@ def myBridge(self, str, _old=None):
             $('.autocomplete').remove();
 
             if (currentField) {
-                $('<div class="autocomplete"><span class="copy">' + %s + '</span></div>').click(function () { currentField.innerHTML = %s }).insertAfter(currentField)
+                $('<div class="autocomplete">' + %s + '</div>').click(function () { currentField.innerHTML = %s }).insertAfter(currentField)
             }
         """
         % (escaped, escaped))
