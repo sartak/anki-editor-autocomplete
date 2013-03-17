@@ -58,9 +58,9 @@ def myBridge(self, str, _old=None):
             return
 
         # pull out the full value
-        field = col.getCard(res[0]).note().fields[self.currentField]
+        value = col.getCard(res[0]).note().fields[self.currentField]
 
-        escaped = json.dumps(field)
+        escaped = json.dumps(value)
 
         self.web.eval("""
             $('.autocomplete').remove();
