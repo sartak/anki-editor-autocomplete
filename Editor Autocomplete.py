@@ -1,4 +1,5 @@
 # https://github.com/sartak/anki-editor-autocomplete
+# -*- coding: utf8 -*-
 
 from aqt import mw
 from aqt import editor
