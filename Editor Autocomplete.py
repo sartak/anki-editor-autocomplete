@@ -9,6 +9,8 @@ from anki.utils import splitFields, stripHTMLMedia
 from anki.utils import json
 import urllib2
 
+noAutocompleteFields = [  ]
+
 def mySetup(self, note, hide=True, focus=False):
     self.prevAutocomplete = ""
 
@@ -46,6 +48,10 @@ def myBridge(self, str, _old=None):
             return
 
         field = self.note.model()['flds'][self.currentField]
+
+        if field['name'] in noAutocompleteFields:
+            field['no_autocomplete'] = True
+
         if 'no_autocomplete' in field.keys() and field['no_autocomplete']:
             return
 
