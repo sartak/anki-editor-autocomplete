@@ -2,6 +2,7 @@
 
 from aqt import mw
 from aqt import editor
+from aqt.fields import FieldDialog
 from anki.hooks import wrap
 from anki.utils import splitFields, stripHTMLMedia
 from anki.utils import json
@@ -81,6 +82,25 @@ def myBridge(self, str, _old=None):
     else:
         _old(self, str)
 
+# XXX must figure out how to add noAutocomplete checkbox to form
+def myLoadField(self, idx):
+    fld = self.model['flds'][idx]
+    f = self.form
+    if 'no_autocomplete' in fld.keys():
+        f.noAutocomplete.setChecked(fld['no_autocomplete'])
+
+def mySaveField(self):
+    # not initialized yet?
+    if self.currentIdx is None:
+        return
+    idx = self.currentIdx
+    fld = self.model['flds'][idx]
+    f = self.form
+    fld['no_autocomplete'] = f.noAutocomplete.isChecked()
+
 editor.Editor.bridge = wrap(editor.Editor.bridge, myBridge, 'around')
 editor.Editor.setNote = wrap(editor.Editor.setNote, mySetup, 'after')
+
+#FieldDialog.loadField = wrap(FieldDialog.loadField, myLoadField, 'after')
+#FieldDialog.saveField = wrap(FieldDialog.saveField, mySaveField, 'after')
 
