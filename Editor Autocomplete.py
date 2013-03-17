@@ -66,7 +66,11 @@ def myBridge(self, str, _old=None):
             $('.autocomplete').remove();
 
             if (currentField) {
-                $('<div class="autocomplete">' + %s + '</div>').click(function () { currentField.innerHTML = %s }).insertAfter(currentField)
+                $('<div class="autocomplete">' + %s + '</div>').click(function () {
+                    currentField.focus();
+                    currentField.innerHTML = %s;
+                    saveField("key");
+                }).insertAfter(currentField)
             }
         """
         % (escaped, escaped))
