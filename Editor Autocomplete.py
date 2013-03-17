@@ -43,11 +43,15 @@ def myBridge(self, str, _old=None):
             self.web.eval("$('.autocomplete').remove();");
             return
 
+        field = self.note.model()['flds'][self.currentField]
+        if 'no_autocomplete' in field.keys() and field['no_autocomplete']:
+            return
+
         # find a value from the same model and field whose
         # prefix is what the user typed so far
         query = "'note:%s' '%s:%s*'" % (
             self.note.model()['name'],
-            self.note.model()['flds'][self.currentField]['name'],
+            field['name'],
             text)
 
         col = self.note.col
