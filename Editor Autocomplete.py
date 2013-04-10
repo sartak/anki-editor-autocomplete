@@ -43,7 +43,7 @@ def myBridge(self, str, _old=None):
             return
         self.prevAutocomplete = previous
 
-        if text == "" or self.note is None:
+        if text == "" or len(text) > 500 or self.note is None:
             self.web.eval("$('.autocomplete').remove();");
             return
 
