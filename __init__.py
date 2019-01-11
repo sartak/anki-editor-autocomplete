@@ -36,7 +36,9 @@ def myBridge(self, cmd, _old=None):
         (type, jsonText) = cmd.split(":", 1)
         result = json.loads(jsonText)
         text = self.mungeHTML(result['text'])
-
+	
+        if self.currentField is None:
+            return
         # bail out if the user hasn't actually changed the field
         previous = "%d:%s" % (self.currentField, text)
         if self.prevAutocomplete == previous:
@@ -78,12 +80,16 @@ def myBridge(self, cmd, _old=None):
             $('.autocomplete').remove();
 
             if (currentField) {
-                $('<div class="autocomplete">' + %s + '</div>').click(function () {
-                    currentField.focus();
-                    currentField.innerHTML = %s;
-                    saveField("key");
-                }).insertAfter(currentField)
+		$('<div class="autocomplete">' + %s + '</div>').click({field: currentField}, updateField).insertAfter(currentField)
             }
+
+	    function updateField(event){
+                currentField = event.data.field;
+                currentField.innerHTML = %s;
+                saveField("key");
+                focusField(currentFieldOrdinal());
+                caretToEnd();
+	    }
         """
         % (escaped, escaped))
     else:
