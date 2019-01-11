@@ -36,7 +36,9 @@ def myBridge(self, cmd, _old=None):
         (type, jsonText) = cmd.split(":", 1)
         result = json.loads(jsonText)
         text = self.mungeHTML(result['text'])
-
+	
+        if self.currentField is None:
+            return
         # bail out if the user hasn't actually changed the field
         previous = "%d:%s" % (self.currentField, text)
         if self.prevAutocomplete == previous:
