@@ -1,7 +1,7 @@
 # Anki Editor Autocomplete - Anki 2.1 Version
 ---
 
-_This is an updated version of Sartak's Editor Autocomplete add-on, which only works with previous versions of Anki. If you aren't using Anki 2.1 or higher, refer to his original repo [here](https://github.com/sartak/anki-editor-autocomplete)_
+_This is an updated version of Sartak's Editor Autocomplete add-on, which only works with previous versions of Anki. If you aren't using Anki 2.1 or higher, refer to his original repo [here](https://github.com/sartak/anki-editor-autocomplete)_.
 
 This add-on enhances the Add Card screen with autocomplete functionality. Just start typing and if an existing card has a value that matches what you've typed, it will be displayed inline in the editor for you. From there you can click the value to quickly set the field.
 
