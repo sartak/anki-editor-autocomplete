@@ -80,12 +80,16 @@ def myBridge(self, cmd, _old=None):
             $('.autocomplete').remove();
 
             if (currentField) {
-                $('<div class="autocomplete">' + %s + '</div>').click(function () {
-                    currentField.focus();
-                    currentField.innerHTML = %s;
-                    saveField("key");
-                }).insertAfter(currentField)
+		$('<div class="autocomplete">' + %s + '</div>').click({field: currentField}, updateField).insertAfter(currentField)
             }
+
+	    function updateField(event){
+                currentField = event.data.field;
+                currentField.innerHTML = %s;
+                saveField("key");
+                focusField(currentFieldOrdinal());
+                caretToEnd();
+	    }
         """
         % (escaped, escaped))
     else:
